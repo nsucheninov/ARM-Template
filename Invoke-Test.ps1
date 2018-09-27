@@ -1,14 +1,4 @@
-#$parameters = @{ ResourceGroupName = "test03"; TemplateFile = "$(System.DefaultWorkingDirectory)\azuredeploy.json"; TemplateParameterFile = "$(System.DefaultWorkingDirectory)\azuredeploy.parameters.json" }
-#$script = @{ Path = "$(System.DefaultWorkingDirectory)\Template.Tests.ps1"; Parameters = $parameters }
+$parameters = @{ ResourceGroupName = "test03"; TemplateFile = "$Env:BUILD_SOURCESDIRECTORY\azuredeploy.json"; TemplateParameterFile = "$Env:BUILD_SOURCESDIRECTORY\azuredeploy.parameters.json" }
+$script = @{ Path = "$Env:BUILD_SOURCESDIRECTORY\Template.Tests.ps1"; Parameters = $parameters }
 
-Write-Host "Test:"
-Write-Host "----------------------------------"
-Get-Module -Name Pester
-Write-Host "----------------------------------"
-Write-Host "source directory = $Env:BUILD_SOURCESDIRECTORY"
-Write-Host "----------------------------------"
-Get-Content "$Env:BUILD_SOURCESDIRECTORY\azuredeploy.parameters.json"
-Write-Host "----------------------------------"
-
-
-#Invoke-Pester -Script $script
+Invoke-Pester -Script $script
