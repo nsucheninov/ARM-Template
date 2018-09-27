@@ -13,6 +13,14 @@ Describe "Template Deployment Tests" {
     $DebugPreference = "SilentlyContinue"
   }
 
+  Context "Resource Group" {
+    It "Passed Resource Group existence check" {
+        $group = Get-AzureRmResourceGroup -Name $ResourceGroupName 5>&1
+        $group | Should -Not -Be $null
+    }
+  }
+
+
   Context "When Template deployed without parameters" {
     try {
       $output = Test-AzureRmResourceGroupDeployment `
@@ -47,11 +55,10 @@ Describe "Template Deployment Tests" {
       $result.provisioningState | Should -Be "Succeeded"
     }
 
-    It "Should have name of" {
-      $expected = $Parameters.LogicAppName1 + "-" + $Parameters.LogicAppName2
-      $resource = $result.validatedResources[0]
+    It "Virtual machine should have name" {
+      $resource = $result.validatedResources | Where-Object type -match "virtualMachine"
 
-      $resource.name | Should -Be $expected
+      $resource.name | Should -Not -Be ([string]::Empty)
     }
   }
 }
