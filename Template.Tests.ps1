@@ -54,7 +54,7 @@ Describe "Template Deployment Tests" {
               -ErrorAction Stop `
                5>&1
 
-    $result = ((($output | whhere {$_ -match "HTTP RESPONSE"}) -split "Body:")[1] | ConvertFrom-Json).properties
+    $result = ((($output | Where-Object {$_ -match "HTTP RESPONSE"}) -split "Body:")[1] | ConvertFrom-Json).properties
 
     It "Should be deployed successfully" {
       $result.provisioningState | Should -Be "Succeeded"
