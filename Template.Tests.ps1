@@ -1,11 +1,8 @@
 Param(
-  [string] [Parameter(Mandatory=$false)] $ResourceGroupName ="test03",
+  [string] [Parameter(Mandatory=$false)] $ResourceGroupName,
   [string] [Parameter(Mandatory=$false)] $TemplateFile,
   [string] [Parameter(Mandatory=$false)] $TemplateParameterFile
 )
-
-$TemplateFile = "$(System.DefaultWorkingDirectory)\azuredeploy.json"
-$TemplateParameterFile = "$(System.DefaultWorkingDirectory)\azuredeploy.parameters.json"
 
 Describe "Template Deployment Tests" {
   BeforeAll {
