@@ -55,7 +55,7 @@ Describe "Template Deployment Tests" {
                5>&1
 
     Write-Host "-------------------"
-    Write-Host $output
+    Write-Host ($output[32] -split "Body:")[1]
     Write-Host "-------------------"
     $result = (($output[32] -split "Body:")[1] | ConvertFrom-Json).properties
 
