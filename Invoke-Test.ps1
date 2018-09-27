@@ -2,7 +2,8 @@
 #$script = @{ Path = "$(System.DefaultWorkingDirectory)\Template.Tests.ps1"; Parameters = $parameters }
 
 Write-Host "Test:"
-#Write-Host $(system.teamProject)
+Write-Host "----------------------------------"
+Get-Module -Name Pester
 Write-Host "----------------------------------"
 Write-Host "source directory = $Env:BUILD_SOURCESDIRECTORY"
 Write-Host "----------------------------------"
