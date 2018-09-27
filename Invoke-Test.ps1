@@ -5,4 +5,4 @@ $outputFile = "$ENV:COMMON_TESTRESULTSDIRECTORY\TEST-testFile-$ENV:BUILD_BUILDNU
 
 Write-Host $outputFile
 
-Invoke-Pester -Script $script -OutputFile $outputFile
+Invoke-Pester -Script $script -OutputFile $outputFile -OutputFormat NUnitXml
