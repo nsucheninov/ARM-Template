@@ -1,7 +1,7 @@
 Param(
   [string] [Parameter(Mandatory=$true)] $ResourceGroupName,
   [string] [Parameter(Mandatory=$true)] $TemplateFile,
-  [hashtable] [Parameter(Mandatory=$true)] $Parameters
+  [string] [Parameter(Mandatory=$true)] $TemplateParameterFile
 )
 
 Describe "Template Deployment Tests" {
@@ -13,6 +13,13 @@ Describe "Template Deployment Tests" {
     $DebugPreference = "SilentlyContinue"
   }
 
+  Context "Pester module" {
+    It "Passed Pester module version check" {
+      $module = Get-Module -Name Pester | Where-Object Version -match "4.4.*" 5>&1
+      $module | Should -Not -Be $null
+    }
+  }
+
   Context "Resource Group" {
     It "Passed Resource Group existence check" {
         $group = Get-AzureRmResourceGroup -Name $ResourceGroupName 5>&1
@@ -20,15 +27,12 @@ Describe "Template Deployment Tests" {
     }
   }
 
-
   Context "When Template deployed without parameters" {
     try {
       $output = Test-AzureRmResourceGroupDeployment `
                 -ResourceGroupName $ResourceGroupName `
                 -TemplateFile $TemplateFile `
-                -adminUsername $null `
-                -adminPassword $null `
-                -dnsLabelPrefix $null `
+                -TemplateParameterFile $null `
                 -ErrorAction Stop `
                  5>&1
     }
@@ -46,7 +50,7 @@ Describe "Template Deployment Tests" {
     $output = Test-AzureRmResourceGroupDeployment `
               -ResourceGroupName $ResourceGroupName `
               -TemplateFile $TemplateFile `
-              -TemplateParameterObject $Parameters `
+              -TemplateParameterFile $TemplateParameterFile `
               -ErrorAction Stop `
                5>&1
     $result = (($output[32] -split "Body:")[1] | ConvertFrom-Json).properties
