@@ -1,11 +1,10 @@
 #$parameters = @{ ResourceGroupName = "test03"; TemplateFile = "$(System.DefaultWorkingDirectory)\azuredeploy.json"; TemplateParameterFile = "$(System.DefaultWorkingDirectory)\azuredeploy.parameters.json" }
 #$script = @{ Path = "$(System.DefaultWorkingDirectory)\Template.Tests.ps1"; Parameters = $parameters }
 
-Get-Location
-Get-ChildItem
-
 Write-Host "Test:"
-Write-Host $System.DefaultWorkingDirectory
-Write-Host $system.teamProject
+Write-Host $(system.DefaultWorkingDirectory)
+Write-Host "----------------------------------"
+Write-Host $(system.teamProject)
+Write-Host "----------------------------------"
 
 #Invoke-Pester -Script $script
