@@ -2,9 +2,9 @@
 #$script = @{ Path = "$(System.DefaultWorkingDirectory)\Template.Tests.ps1"; Parameters = $parameters }
 
 Write-Host "Test:"
-Write-Host $(system.DefaultWorkingDirectory)
-Write-Host "----------------------------------"
 Write-Host $(system.teamProject)
+Write-Host "----------------------------------"
+Write-Host $(system.DefaultWorkingDirectory)
 Write-Host "----------------------------------"
 
 #Invoke-Pester -Script $script
