@@ -6,11 +6,8 @@ Write-Host "Test:"
 Write-Host "----------------------------------"
 Write-Host "source directory = $Env:BUILD_SOURCESDIRECTORY"
 Write-Host "----------------------------------"
-(get-location).ToString()
+Get-Content "$Env:BUILD_SOURCESDIRECTORY\azuredeploy.parameters.json"
 Write-Host "----------------------------------"
-Get-ChildItem | select Name
-Write-Host "----------------------------------"
-Get-ChildItem $Env:BUILD_SOURCESDIRECTORY
 
 
 #Invoke-Pester -Script $script
