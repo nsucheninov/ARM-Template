@@ -53,6 +53,10 @@ Describe "Template Deployment Tests" {
               -TemplateParameterFile $TemplateParameterFile `
               -ErrorAction Stop `
                5>&1
+
+    Write-Host "-------------------"
+    Write-Host $output
+    Write-Host "-------------------"
     $result = (($output[32] -split "Body:")[1] | ConvertFrom-Json).properties
 
     It "Should be deployed successfully" {
