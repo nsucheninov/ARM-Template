@@ -4,3 +4,4 @@ $script = @{ Path = "$Env:BUILD_SOURCESDIRECTORY\Template.Tests.ps1"; Parameters
 $outputFile = "$ENV:COMMON_TESTRESULTSDIRECTORY\TEST-testFile-$ENV:BUILD_BUILDNUMBER.xml"
 
 Invoke-Pester -Script $script -OutputFile $outputFile -OutputFormat NUnitXml
+
